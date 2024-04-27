@@ -1,0 +1,55 @@
+﻿@page
+@model RegForm.Pages.Clients.IndexModel
+@{
+}
+
+<br>
+<h2>List of Users</h2>
+<!--This Button will go to Create page when we hit it-->
+<a class='btn btn-primary btn-sm' href='/Clients/Create'>Registration of New User </a>
+
+
+<table class="table"> 
+    <thead>
+        <tr>
+           <!-- <th>ID</th> -->
+           <th>Full Name</th>
+            <!--  <th>First Name</th> 
+            <th>Last Name</th> -->
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>DOB</th>
+            <th>Address</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Action</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <!--Reading the list viz is listclients by using Model Class-->
+        @foreach(var item in Model.listClints)
+        {
+            <tr>
+                <td>@item.fullName</td>
+               
+                <td>@item.email</td>
+                <td>@item.phone</td>
+                <td>@item.dob</td>
+                <td>@item.address</td>
+                <td>@item.state</td>
+                <td>@item.city</td>
+                <td>
+                    <a class=" btn btn-primary btn-sm" href="/Clients/Edit?id=@item.id">EDIT</a>
+                    <a style ="background-color:red" class=" btn btn-primary btn-sm" href="/Clients/Delete?id=@item.id">DELETE</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+

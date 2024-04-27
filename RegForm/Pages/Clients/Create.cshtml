@@ -1,0 +1,169 @@
+﻿@page
+@model RegForm.Pages.Clients.CreateModel
+@{
+}
+
+<br>
+
+<h2>New User</h2>
+
+<!--displaying alert if meassage is not empty then it will display the below alert -->
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<script>
+
+    // City data based on state
+    const cityData = {
+        Goa: ["Panaji", "Margao", "Vasco da Gama"],
+        Maharashtra: ["Mumbai", "Pune", "Nagpur"],
+        Karnataka: ["Bengaluru", "Mysore", "Hubli"]
+    };
+
+    // Function to populate cities based on the selected state
+    function populateCities() {
+        const stateDropdown = document.getElementById("state");
+        const cityDropdown = document.getElementById("city");
+
+        // Clear existing cities
+        cityDropdown.innerHTML = "<option value=''>-- Select City --</option>";
+
+        // Get the selected state
+        const selectedState = stateDropdown.value;
+
+        // Populate cities if a state is selected
+        if (selectedState !== "") {
+            const cities = cityData[selectedState];
+            for (let i = 0; i < cities.length; i++) {
+                const option = document.createElement("option");
+                option.text = cities[i];
+                option.value = cities[i];
+                cityDropdown.appendChild(option);
+            }
+        }
+    }
+
+</script>
+
+<form method="POST">
+
+    <div class="row mb-3">
+
+        <label class="col-sm-3 col-form-label required-field">First Name <span style="color:red"> *</span></label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="firstName" value="@Model.clientInfo.firstName">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+
+        <label class="col-sm-3 col-form-label">Last Name <span style="color:red"> *</span></label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="lastName" value="@Model.clientInfo.lastName">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+
+        <label class="col-sm-3 col-form-label">Email <span style="color:red"> *</span></label>
+        <div class="col-sm-6">
+            <input type="email" class="form-control" name="email" value="@Model.clientInfo.email">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+
+        <label class="col-sm-3 col-form-label">Phone Number <span style="color:red"> *</span></label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="phone" value="@Model.clientInfo.phone">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+
+        <label class="col-sm-3 col-form-label">Date of Birth <span style="color:red"> *</span></label>
+        <div class="col-sm-6">
+            <input type="date" class="form-control" name="dob" value="@Model.clientInfo.dob">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+
+        <label class="col-sm-3 col-form-label">Address <span style="color:red"> *</span></label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="address" value="@Model.clientInfo.address">
+        </div>
+    </div>
+    
+    
+
+  <!--  <div class="row mb-3">
+
+        <label class="col-sm-3">Select State <span style="color:red"> *</span></label>
+        <select name="state" value="@Model.clientInfo.state"> 
+            <option>Maharashtra</option>
+            <option>Karnataka</option>
+            <option>Goa</option>
+        </select>
+
+    </div>
+      -->
+
+    <div>
+
+        <label for="state">Select a state: <span style="color:red"> *</span></label>
+
+        <select id="state" onchange="populateCities()" name="state">
+          &ensp;  <option value="@Model.clientInfo.state" >-- Select State --</option>
+            <option value="Goa">Goa</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Karnataka">Karnataka</option>
+        </select>
+    
+      </div>
+
+    <br>
+
+    <div>
+    
+         <label for="city">Select a city: <span style="color:red"> *</span></label>
+         <select id="city" name="city">
+            <option value="@Model.clientInfo.city">-- Select City --</option>
+         </select>
+
+      </div>
+
+
+
+    @if (Model.successMessage.Length >0)
+    {
+        <div class="row mb-3" >
+            <div class="col-sm-9">
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                    <strong>@Model.successMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row mb-3">
+
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a class="btn btn-outline-primary" href="/" role="button">Cancel</a>  <!--Take us to the Main Page -->
+        </div>
+    </div>
+
+</form>
+
+
+
